@@ -2,12 +2,14 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.12.4
+// 	protoc        v3.12.4
 // source: chat.proto
 
 package chat_v1
 
 import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	empty "github.com/golang/protobuf/ptypes/empty"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"

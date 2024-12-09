@@ -2,6 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.12.4
+// - protoc             v3.12.4
 // source: chat.proto
 
 package chat_v1
