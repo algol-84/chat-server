@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "contact": {
       "name": "algol",
-      "email": "algol@mail.ru"
+      "email": "example@mail"
     }
   },
   "tags": [
@@ -25,6 +25,9 @@
     "application/json"
   ],
   "paths": {
+<<<<<<< HEAD
+    "/chat/v1/connect": {
+=======
     "/chat/v1": {
       "delete": {
         "operationId": "ChatV1_Delete",
@@ -57,13 +60,23 @@
           "ChatV1"
         ]
       },
+>>>>>>> main
       "post": {
-        "operationId": "ChatV1_Create",
+        "operationId": "ChatV1_ConnectChat",
         "responses": {
           "200": {
-            "description": "A successful response.",
+            "description": "A successful response.(streaming responses)",
             "schema": {
-              "$ref": "#/definitions/chat_v1CreateResponse"
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/chat_v1Message"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of chat_v1Message"
             }
           },
           "default": {
@@ -79,7 +92,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/chat_v1CreateRequest"
+              "$ref": "#/definitions/chat_v1ConnectChatRequest"
             }
           }
         ],
@@ -88,6 +101,73 @@
         ]
       }
     },
+    "/chat/v1/create": {
+      "post": {
+        "operationId": "ChatV1_CreateChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/chat_v1CreateChatResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "tags": [
+          "ChatV1"
+        ]
+      }
+    },
+<<<<<<< HEAD
+    "/chat/v1/delete": {
+      "delete": {
+        "operationId": "ChatV1_DeleteChat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ChatV1"
+        ]
+      }
+    },
+=======
+>>>>>>> main
     "/chat/v1/send-message": {
       "post": {
         "operationId": "ChatV1_SendMessage",
@@ -123,9 +203,16 @@
     }
   },
   "definitions": {
-    "chat_v1Chat": {
+    "chat_v1ConnectChatRequest": {
       "type": "object",
       "properties": {
+<<<<<<< HEAD
+        "chatId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+=======
         "usernames": {
           "type": "array",
           "items": {
@@ -142,20 +229,25 @@
         "chat": {
           "$ref": "#/definitions/chat_v1Chat",
           "title": "Создает новый чат из списка юзеров в запросе"
+>>>>>>> main
         }
       }
     },
-    "chat_v1CreateResponse": {
+    "chat_v1CreateChatResponse": {
       "type": "object",
       "properties": {
         "id": {
+<<<<<<< HEAD
+          "type": "string"
+=======
           "type": "string",
           "format": "int64",
           "title": "Возвращает ответ с идентификатором созданного чата"
+>>>>>>> main
         }
       }
     },
-    "chat_v1SendMessageRequest": {
+    "chat_v1Message": {
       "type": "object",
       "properties": {
         "from": {
@@ -166,10 +258,21 @@
           "type": "string",
           "title": "Текст сообщения"
         },
-        "timestamp": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "title": "Время отправки"
+        }
+      }
+    },
+    "chat_v1SendMessageRequest": {
+      "type": "object",
+      "properties": {
+        "chatId": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/chat_v1Message"
         }
       }
     },
